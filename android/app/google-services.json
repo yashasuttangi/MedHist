@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "995032296321",
+    "project_id": "medhist-backend",
+    "storage_bucket": "medhist-backend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995032296321:android:6a6135dacdc6a70fe25680",
+        "android_client_info": {
+          "package_name": "com.example.Medhist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995032296321-iflcflla4ihiu2reemfb8birjpc1nln1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Medhist",
+            "certificate_hash": "ec697847366127b2b7a330393761d160af62c753"
+          }
+        },
+        {
+          "client_id": "995032296321-mkoci9mb3u4i77ula8h87001eh3c50uv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBVVn0WvvgNcoA3bCzhzGJESvnoToH-fo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995032296321-mkoci9mb3u4i77ula8h87001eh3c50uv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
