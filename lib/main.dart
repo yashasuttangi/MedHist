@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:Medhist/screens/home_screen.dart';
+import 'package:Medhist/screens/doctor_home_screen.dart';
 import 'package:Medhist/screens/login_screen.dart';
 import 'package:Medhist/screens/signup_screen.dart';
+
 import 'package:Medhist/models/authentication.dart';
 
 void main() => runApp(MyApp());

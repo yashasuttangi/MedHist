@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'signup_screen.dart';
-import 'home_screen.dart';
+import 'doctor_home_screen.dart';
 import '../models/authentication.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -67,8 +67,11 @@ class _LoginScreenState extends State<LoginScreen> {
           )
         ],
       ),
-      body: Stack(
+      body: Column(
         children: <Widget>[
+          Container(
+            child: Center(child: Image.asset('images/Medhist_logo.jpg')),
+          ),
           Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [
@@ -76,8 +79,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 Colors.blue[700],
               ])),
               child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text("Welcome to MedHist"))
+                alignment: Alignment.topLeft,
+                child: SizedBox(
+                  height: 80,
+                  width: 400,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    child: Text(
+                      "Welcome to MedHist",
+                      style: TextStyle(
+                          fontSize: 35.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+              )
               // child: Text("Welcome to MedHist", textAlign: TextAlign.top,),
               ),
           Container(
@@ -91,76 +109,77 @@ class _LoginScreenState extends State<LoginScreen> {
               //   ],
               // ),
               child: Center(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
+            child: Container(
+              // shape: RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.circular(20.0),
+              // ),
+              color: Colors.blue[50],
               child: Container(
-                height: 360,
-                width: 300,
+                height: 300,
+                width: 350,
                 padding: EdgeInsets.all(16),
                 child: Form(
                   key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        //email
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Email'),
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value.isEmpty || !value.contains('@')) {
-                              return 'invalid email';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _authData['email'] = value;
-                          },
-                        ),
+                  // child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      //email
+                      TextFormField(
+                        decoration: InputDecoration(labelText: 'Email'),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value.isEmpty || !value.contains('@')) {
+                            return 'invalid email';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _authData['email'] = value;
+                        },
+                      ),
 
-                        //password
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Password'),
-                          obscureText: true,
-                          validator: (value) {
-                            if (value.isEmpty || value.length <= 5) {
-                              return 'invalid password';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _authData['password'] = value;
-                          },
-                        ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.cyan,
-                                  blurRadius: 50.0,
-                                ),
-                              ],
-                            ),
-                            child: RaisedButton(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 40, vertical: 15),
-                              child: Text('Sign In'),
-                              onPressed: () {
-                                _submit();
-                              },
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                      //password
+                      TextFormField(
+                        decoration: InputDecoration(labelText: 'Password'),
+                        obscureText: true,
+                        validator: (value) {
+                          if (value.isEmpty || value.length <= 5) {
+                            return 'invalid password';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _authData['password'] = value;
+                        },
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.cyan,
+                                blurRadius: 50.0,
                               ),
-                              color: Colors.blue,
-                              textColor: Colors.white,
-                            ))
-                      ],
-                    ),
+                            ],
+                          ),
+                          child: RaisedButton(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 15),
+                            child: Text('Sign In'),
+                            onPressed: () {
+                              _submit();
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            color: Colors.blue,
+                            textColor: Colors.white,
+                          ))
+                    ],
                   ),
+                  // ),
                 ),
               ),
             ),
