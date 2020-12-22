@@ -11,11 +11,50 @@ class SignupScreen extends StatefulWidget {
   _SignupScreenState createState() => _SignupScreenState();
 }
 
+class Category {
+  int id;
+  String cat;
+  Category(this.id, this.cat);
+
+  static List<Category> getCategories() {
+    return <Category>[
+      Category(1, 'Doctor'),
+      Category(2, 'Patient'),
+      Category(3, 'Diagnostic Centre'),
+    ];
+  }
+}
+
 class _SignupScreenState extends State<SignupScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   TextEditingController _passwordController = new TextEditingController();
 
   Map<String, String> _authData = {'email': '', 'password': ''};
+
+  List<Category> _categories = Category.getCategories();
+  List<DropdownMenuItem<Category>> _dropdownMenuItems;
+  Category _selectedCategory;
+
+  @override
+  void initState() {
+    _dropdownMenuItems = buildDropdownMenuItems(_categories);
+    _selectedCategory = _dropdownMenuItems[0].value;
+    super.initState();
+  }
+
+  List<DropdownMenuItem<Category>> buildDropdownMenuItems(List categories) {
+    List<DropdownMenuItem<Category>> items = List();
+    for (Category category in categories) {
+      items.add(DropdownMenuItem(value: category, child: Text(category.cat)));
+    }
+    return items;
+  }
+
+  onChangedDropdownItem(Category selectedCategory) {
+    setState(() {
+      _selectedCategory = selectedCategory;
+    });
+  }
 
   void _showErrorDialog(String msg) {
     showDialog(
@@ -167,7 +206,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           onSaved: (value) {},
                         ),
 
-                        //
+                        // HOSPITAL NAME
                         TextFormField(
                           decoration:
                               InputDecoration(labelText: 'Hospital Name'),
@@ -182,6 +221,25 @@ class _SignupScreenState extends State<SignupScreen> {
                             // _authData['email'] = value;
                           },
                         ),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "Category :   ",
+                                style: TextStyle(fontSize: 15),
+                              ),
+                              SizedBox(
+                                  height: 20.0,
+                                  child: DropdownButton(
+                                    value: _selectedCategory,
+                                    items: _dropdownMenuItems,
+                                    onChanged: onChangedDropdownItem,
+                                  )),
+                            ]),
 
                         SizedBox(
                           height: 25,

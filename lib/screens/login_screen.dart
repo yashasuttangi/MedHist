@@ -70,14 +70,17 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Column(
         children: <Widget>[
           Container(
-            child: Center(child: Image.asset('images/Medhist_logo.jpg')),
-          ),
+              // padding: EdgeInsets.symmetric(horizontal: 400, vertical: 100),
+              child: Center(
+            child: Image.asset('images/Medhist_logo.jpg'),
+          )),
           Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                Colors.cyan,
-                Colors.blue[700],
-              ])),
+              color: Colors.white,
+              // decoration: BoxDecoration(
+              //     gradient: LinearGradient(colors: [
+              //   Colors.white,
+              //   Colors.blue[300],
+              // ])),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: SizedBox(
@@ -90,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(
                           fontSize: 35.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Colors.blue[700]),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -108,19 +111,20 @@ class _LoginScreenState extends State<LoginScreen> {
               //     ),
               //   ],
               // ),
-              child: Center(
+              child: Expanded(
+                  child: Container(
+                      child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            color: Colors.blue[50],
             child: Container(
-              // shape: RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.circular(20.0),
-              // ),
-              color: Colors.blue[50],
-              child: Container(
-                height: 300,
-                width: 350,
-                padding: EdgeInsets.all(16),
-                child: Form(
-                  key: _formKey,
-                  // child: SingleChildScrollView(
+              height: 250,
+              width: 350,
+              padding: EdgeInsets.all(16),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
                       //email
@@ -152,6 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           _authData['password'] = value;
                         },
                       ),
+
                       SizedBox(
                         height: 50,
                       ),
@@ -183,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-          ))
+          ))))
         ],
       ),
     );
