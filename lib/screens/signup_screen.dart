@@ -20,7 +20,7 @@ class Category {
     return <Category>[
       Category(1, 'Doctor'),
       Category(2, 'Patient'),
-      Category(3, 'Diagnostic Centre'),
+      // Category(3, 'Diagnostic Centre'),
     ];
   }
 }

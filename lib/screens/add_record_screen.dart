@@ -10,7 +10,8 @@ class _AddRecordState extends State<AddRecord> {
     'id': '',
     'ailment': '',
     'prescription': '',
-    'checked': ''
+    'checked': '',
+    'remarks': ''
   };
 
   bool _checked;
@@ -23,7 +24,7 @@ class _AddRecordState extends State<AddRecord> {
           backgroundColor: Colors.blue,
         ),
         body: Container(
-            height: 300,
+            height: 600,
             width: 400,
             padding: EdgeInsets.all(16),
             child: Form(
@@ -80,6 +81,36 @@ class _AddRecordState extends State<AddRecord> {
                     },
                   ),
 
+                  SizedBox(height: 15.0),
+                  // Prescription
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Extra Remarks',
+                    ),
+                    // contentPadding: EdgeInsets.all(20.0)),
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Enter Remarks';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _patientData['remarks'] = value;
+                    },
+                  ),
+
+                  RaisedButton(
+                    child: Text('Submit'),
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                  )
+
                   // SizedBox(
                   //   height: 100,
                   //   width: 450,
@@ -97,17 +128,17 @@ class _AddRecordState extends State<AddRecord> {
                   //   ),
                   // ),
 
-                  Row(children: <Widget>[
-                    //   Checkbox(
-                    //       // value: _checked,
-                    //       onChanged: (bool value) {
-                    //     // print(value);
-                    //     setState(() {
-                    //       _checked = value;
-                    //     });
-                    //   }),
-                    //   Text("Blood Test")
-                  ]),
+                  // Row(children: <Widget>[
+                  //   //   Checkbox(
+                  //   //       // value: _checked,
+                  //   //       onChanged: (bool value) {
+                  //   //     // print(value);
+                  //   //     setState(() {
+                  //   //       _checked = value;
+                  //   //     });
+                  //   //   }),
+                  //   //   Text("Blood Test")
+                  // ]),
                 ],
               ),
             ))));

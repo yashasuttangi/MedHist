@@ -70,82 +70,185 @@ class HomeScreen extends StatelessWidget {
                             child: SizedBox(
                                 height: 100.0,
                                 width: 150.0,
-                                child: Container(
-                                  ///////// NEED TO WORK ON SHADOW FOR THE BUTTON and ///
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                        color: Colors.blue.withOpacity(0.1),
-                                        blurRadius: 10,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: RaisedButton(
-                                    onPressed: () => {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AddRecord())),
-                                    },
-                                    color: Colors.white,
-                                    child: Text("Add Record"),
-                                    splashColor: Colors.blue[100],
-                                  ),
-                                ))),
+                                child: IconButton(
+                                  icon: Image.asset('images/add_record.jpg'),
+                                  iconSize: 100,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => AddRecord()));
+                                  },
+                                )
+                                // child: RaisedButton(
+                                //   onPressed: () => {
+                                //     Navigator.push(
+                                //         context,
+                                //         MaterialPageRoute(
+                                //             builder: (context) =>
+                                //                 AddRecord())),
+                                //   },
+                                //   color: Colors.white,
+                                //   child: Text("Add Record"),
+                                //   splashColor: Colors.blue[100],
+                                // ),
+                                )),
+
                         Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: MaterialButton(
-                            onPressed: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RecentPatientLog()))
-                            },
-                            height: 100.0,
-                            minWidth: 150.0,
-                            color: Colors.white,
-                            child: Text("Recent Patient Log"),
-                            splashColor: Colors.blue[100],
-                          ),
-                        ),
+                            padding: EdgeInsets.all(20.0),
+                            child: SizedBox(
+                                height: 100.0,
+                                width: 150.0,
+                                child: IconButton(
+                                  icon: Image.asset('images/recent_record.jpg'),
+                                  iconSize: 100,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RecentPatientLog()));
+                                  },
+                                )
+                                // child: RaisedButton(
+                                //   onPressed: () => {
+                                //     Navigator.push(
+                                //         context,
+                                //         MaterialPageRoute(
+                                //             builder: (context) =>
+                                //                 AddRecord())),
+                                //   },
+                                //   color: Colors.white,
+                                //   child: Text("Add Record"),
+                                //   splashColor: Colors.blue[100],
+                                // ),
+                                )),
+                        // Padding(
+                        //     padding: EdgeInsets.all(20.0),
+                        //     child: IconButton(
+                        //       icon: Image.asset('images/search_patients.jpg'),
+                        //       iconSize: 100,
+                        //       onPressed: () {},
+                        //     )
+                        // child: MaterialButton(
+                        //   onPressed: () => {
+                        //     Navigator.push(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //             builder: (context) => RecentPatientLog()))
+                        //   },
+                        //   height: 100.0,
+                        //   minWidth: 150.0,
+                        //   color: Colors.white,
+                        //   child: Text("Recent Patient Log"),
+                        //   splashColor: Colors.blue[100],
+                        // ),
                       ]),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: MaterialButton(
-                            onPressed: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SearchScreen()))
-                            },
-                            height: 100.0,
-                            minWidth: 150.0,
-                            color: Colors.white,
-                            child: Text("Search Patient"),
-                            splashColor: Colors.blue[100],
-                          ),
-                        ),
+                            padding: EdgeInsets.all(20.0),
+                            child: SizedBox(
+                                height: 100.0,
+                                width: 150.0,
+                                child: IconButton(
+                                  icon:
+                                      Image.asset('images/search_patients.jpg'),
+                                  iconSize: 100,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SearchScreen()));
+                                  },
+                                )
+                                // child: RaisedButton(
+                                //   onPressed: () => {
+                                //     Navigator.push(
+                                //         context,
+                                //         MaterialPageRoute(
+                                //             builder: (context) =>
+                                //                 AddRecord())),
+                                //   },
+                                //   color: Colors.white,
+                                //   child: Text("Add Record"),
+                                //   splashColor: Colors.blue[100],
+                                // ),
+                                )),
+                        // Padding(
+                        //     padding: EdgeInsets.all(20.0),
+                        //     child: IconButton(
+                        //       icon: Image.asset('images/search_patients.jpg'),
+                        //       iconSize: 100,
+                        //       onPressed: () {},
+                        //     )
+                        // MaterialButton(
+                        //   onPressed: () => {
+                        //     Navigator.push(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //             builder: (context) => SearchScreen()))
+                        //   },
+                        //   height: 100.0,
+                        //   minWidth: 150.0,
+                        //   color: Colors.white,
+                        //   child:
+                        //       Row(children: <Widget>[
+                        //         Text("Search Patient")
+                        //         Icons.search
+                        //         ]),
+                        //   splashColor: Colors.blue[100],
+                        // ),
                         Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: MaterialButton(
-                            onPressed: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChatBox()))
-                            },
-                            height: 100.0,
-                            minWidth: 150.0,
-                            color: Colors.white,
-                            child: Text("Chatbox"),
-                            splashColor: Colors.blue[100],
-                          ),
-                        ),
+                            padding: EdgeInsets.all(20.0),
+                            child: SizedBox(
+                                height: 100.0,
+                                width: 150.0,
+                                child: IconButton(
+                                  icon: Image.asset('images/doc_chat.jpg'),
+                                  iconSize: 100,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ChatBox()));
+                                  },
+                                )
+                                // child: RaisedButton(
+                                //   onPressed: () => {
+                                //     Navigator.push(
+                                //         context,
+                                //         MaterialPageRoute(
+                                //             builder: (context) =>
+                                //                 AddRecord())),
+                                //   },
+                                //   color: Colors.white,
+                                //   child: Text("Add Record"),
+                                //   splashColor: Colors.blue[100],
+                                // ),
+                                )),
+                        // Padding(
+                        //     padding: EdgeInsets.all(20.0),
+                        //     child: IconButton(
+                        //       icon: Image.asset('images/search_patients.jpg'),
+                        //       iconSize: 100,
+                        //       onPressed: () {},
+                        //     )
+                        // child: MaterialButton(
+                        //   onPressed: () => {
+                        //     Navigator.push(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //             builder: (context) => ChatBox()))
+                        //   },
+                        //   height: 100.0,
+                        //   minWidth: 150.0,
+                        //   color: Colors.white,
+                        //   child: Text("Chatbox"),
+                        //   splashColor: Colors.blue[100],
+                        // ),
                       ])
                 ]))));
   }

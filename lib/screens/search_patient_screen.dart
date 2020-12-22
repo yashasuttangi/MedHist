@@ -14,7 +14,35 @@ class _SearchScreenState extends State<SearchScreen> {
           backgroundColor: Colors.blue,
         ),
         body: Container(
-          color: Colors.blue[200],
-        ));
+            child: Column(
+          children: <Widget>[
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: "Search username..",
+                            hintStyle:
+                                TextStyle(fontSize: 18, color: Colors.black26),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {},
+                    )
+                    // Container(
+                    //     padding: EdgeInsets.all(10),
+                    //     child: RaisedButton(
+                    //       padding: EdgeInsets.all(10),
+                    //       child: (Image.asset("images/search_vector.png")),
+                    //       onPressed: () {},
+                    //     ))
+                  ],
+                ))
+          ],
+        )));
   }
 }

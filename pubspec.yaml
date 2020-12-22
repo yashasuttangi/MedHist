@@ -58,6 +58,7 @@ flutter:
     - images/recent_record.jpg
     - images/search_patients.jpg
     - images/doc_chat.jpg
+    - images/search_vector.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
