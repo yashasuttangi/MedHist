@@ -72,8 +72,8 @@ class _SignupScreenState extends State<SignupScreen> {
           Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [
-              Colors.limeAccent,
-              Colors.redAccent,
+              Colors.blueAccent,
+              Colors.blue,
             ])),
           ),
           Center(
@@ -82,15 +82,46 @@ class _SignupScreenState extends State<SignupScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Container(
-                height: 300,
-                width: 300,
+                height: 550,
+                width: 370,
                 padding: EdgeInsets.all(16),
                 child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
-                        //email
+                        // NAME
+                        TextFormField(
+                          decoration: InputDecoration(labelText: 'Full Name'),
+                          keyboardType: TextInputType.text,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Enter your name';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            // _authData['email'] = value;
+                          },
+                        ),
+
+                        // PHONE NUMBER
+                        TextFormField(
+                          decoration:
+                              InputDecoration(labelText: 'Phone Number'),
+                          keyboardType: TextInputType.text,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Enter phone number';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            // _authData['email'] = value;
+                          },
+                        ),
+
+                        //EMAIL
                         TextFormField(
                           decoration: InputDecoration(labelText: 'Email'),
                           keyboardType: TextInputType.emailAddress,
@@ -105,7 +136,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                         ),
 
-                        //password
+                        //PASSWORD
                         TextFormField(
                           decoration: InputDecoration(labelText: 'Password'),
                           obscureText: true,
@@ -121,7 +152,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                         ),
 
-                        //Confirm Password
+                        //CONFIRM PASSWORD
                         TextFormField(
                           decoration:
                               InputDecoration(labelText: 'Confirm Password'),
@@ -135,8 +166,25 @@ class _SignupScreenState extends State<SignupScreen> {
                           },
                           onSaved: (value) {},
                         ),
+
+                        //
+                        TextFormField(
+                          decoration:
+                              InputDecoration(labelText: 'Hospital Name'),
+                          keyboardType: TextInputType.text,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Enter the hospital name';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            // _authData['email'] = value;
+                          },
+                        ),
+
                         SizedBox(
-                          height: 30,
+                          height: 25,
                         ),
                         RaisedButton(
                           child: Text('Submit'),
