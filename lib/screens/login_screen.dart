@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'signup_screen.dart';
 import 'doctor_home_screen.dart';
 import '../models/authentication.dart';
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       await Provider.of<Authentication>(context, listen: false)
           .logIn(_authData['email'], _authData['password']);
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      Navigator.of(context).pushReplacementNamed(DoctorHomeScreen.routeName);
     } catch (error) {
       var errorMessage = 'Authentication Failed. Please try again later.';
       _showErrorDialog(errorMessage);

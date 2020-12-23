@@ -4,7 +4,7 @@ import 'package:Medhist/screens/doctor_home_screen.dart';
 import 'package:Medhist/screens/login_screen.dart';
 import 'package:Medhist/screens/signup_screen.dart';
 import 'package:Medhist/screens/search_patient_screen.dart';
-
+import 'package:Medhist/screens/patient_home_screen.dart';
 import 'package:Medhist/models/authentication.dart';
 
 void main() => runApp(MyApp());
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         routes: {
           SignupScreen.routeName: (ctx) => SignupScreen(),
           LoginScreen.routeName: (ctx) => LoginScreen(),
-          HomeScreen.routeName: (ctx) => HomeScreen(),
+          PatientHomeScreen.routeName: (ctx) => PatientHomeScreen(),
         },
       ),
     );
