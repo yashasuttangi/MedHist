@@ -61,7 +61,7 @@ class PatientHomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 60),
+                  SizedBox(height: 160),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
