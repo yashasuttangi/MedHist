@@ -5,7 +5,7 @@ import 'search_patient_screen.dart';
 import 'chatbox_screen.dart';
 import 'recent_patient_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class DoctorHomeScreen extends StatelessWidget {
   static const routeName = '/home';
 
   @override

@@ -20,7 +20,7 @@ class Category {
     return <Category>[
       Category(1, 'Doctor'),
       Category(2, 'Patient'),
-      // Category(3, 'Diagnostic Centre'),
+      Category(3, 'Diagnostic Centre'),
     ];
   }
 }
@@ -82,7 +82,7 @@ class _SignupScreenState extends State<SignupScreen> {
     try {
       await Provider.of<Authentication>(context, listen: false)
           .signUp(_authData['email'], _authData['password']);
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      Navigator.of(context).pushReplacementNamed(DoctorHomeScreen.routeName);
     } catch (error) {
       var errorMessage = 'Authentication Failed. Please try again later.';
       _showErrorDialog(errorMessage);
@@ -140,7 +140,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             return null;
                           },
                           onSaved: (value) {
-                            // _authData['email'] = value;
+                            _authData['email'] = value;
                           },
                         ),
 
@@ -156,7 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             return null;
                           },
                           onSaved: (value) {
-                            // _authData['email'] = value;
+                            _authData['email'] = value;
                           },
                         ),
 
@@ -218,7 +218,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             return null;
                           },
                           onSaved: (value) {
-                            // _authData['email'] = value;
+                            _authData['email'] = value;
                           },
                         ),
 

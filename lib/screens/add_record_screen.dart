@@ -1,4 +1,6 @@
+import 'package:Medhist/models/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddRecord extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class _AddRecordState extends State<AddRecord> {
     'ailment': '',
     'prescription': '',
     'checked': '',
-    'remarks': ''
+    'extraremarks': ''
   };
 
   bool _checked;
@@ -24,7 +26,7 @@ class _AddRecordState extends State<AddRecord> {
           backgroundColor: Colors.blue,
         ),
         body: Container(
-            height: 600,
+            height: 300,
             width: 400,
             padding: EdgeInsets.all(16),
             child: Form(
@@ -80,36 +82,21 @@ class _AddRecordState extends State<AddRecord> {
                       _patientData['prescription'] = value;
                     },
                   ),
-
                   SizedBox(height: 15.0),
-                  // Prescription
+                  // Ailment
                   TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Extra Remarks',
-                    ),
-                    // contentPadding: EdgeInsets.all(20.0)),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
+                    decoration: InputDecoration(labelText: 'Extra remarks'),
+                    keyboardType: TextInputType.text,
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Enter Remarks';
+                        return 'Extra remarks';
                       }
                       return null;
                     },
                     onSaved: (value) {
-                      _patientData['remarks'] = value;
+                      _patientData['extraremarks'] = value;
                     },
                   ),
-
-                  RaisedButton(
-                    child: Text('Submit'),
-                    onPressed: () {},
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                  )
 
                   // SizedBox(
                   //   height: 100,
@@ -128,17 +115,17 @@ class _AddRecordState extends State<AddRecord> {
                   //   ),
                   // ),
 
-                  // Row(children: <Widget>[
-                  //   //   Checkbox(
-                  //   //       // value: _checked,
-                  //   //       onChanged: (bool value) {
-                  //   //     // print(value);
-                  //   //     setState(() {
-                  //   //       _checked = value;
-                  //   //     });
-                  //   //   }),
-                  //   //   Text("Blood Test")
-                  // ]),
+                  Row(children: <Widget>[
+                    //   Checkbox(
+                    //       // value: _checked,
+                    //       onChanged: (bool value) {
+                    //     // print(value);
+                    //     setState(() {
+                    //       _checked = value;
+                    //     });
+                    //   }),
+                    //   Text("Blood Test")
+                  ]),
                 ],
               ),
             ))));
