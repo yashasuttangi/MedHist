@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 <<<<<<< HEAD
           DoctorHomeScreen.routeName: (ctx) => DoctorHomeScreen(),
 =======
-          PatientHomeScreen.routeName: (ctx) => PatientHomeScreen(),
+          // PatientHomeScreen.routeName: (ctx) => PatientHomeScreen(),
 >>>>>>> 106388a59fcfdecb0d0a669180967a5c1b81402e
         },
       ),
