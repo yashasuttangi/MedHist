@@ -4,22 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(AddRecord());
 }
+
 class AddRecord extends StatefulWidget {
   @override
   _AddRecordState createState() => _AddRecordState();
 }
 
 class _AddRecordState extends State<AddRecord> {
-  TextEditingController _id=new TextEditingController();
-  TextEditingController _ailment=new TextEditingController();
-  TextEditingController _prescription=new TextEditingController();
-  TextEditingController _extraremarks=new TextEditingController();
-
+  TextEditingController _id = new TextEditingController();
+  TextEditingController _ailment = new TextEditingController();
+  TextEditingController _prescription = new TextEditingController();
+  TextEditingController _extraremarks = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,56 +40,49 @@ class _AddRecordState extends State<AddRecord> {
                 children: <Widget>[
                   TextFormField(
                     controller: _id,
-                    decoration:
-                    InputDecoration(
-                        labelText: 'User id',
-                        hintText: 'Enter patients id'
-                    ),
+                    decoration: InputDecoration(
+                        labelText: 'User id', hintText: 'Enter patients id'),
                   ),
                   SizedBox(height: 15.0),
                   //Patient ID
                   TextFormField(
                     controller: _ailment,
-                    decoration:
-                    InputDecoration(
-                        labelText: 'Ailment',
-                        hintText: 'Enter ailment'
-                    ),
+                    decoration: InputDecoration(
+                        labelText: 'Ailment', hintText: 'Enter ailment'),
                   ),
                   SizedBox(height: 15.0),
                   // Prescription
                   TextFormField(
                     controller: _prescription,
-                    decoration:
-                    InputDecoration(
+                    decoration: InputDecoration(
                         labelText: 'prescription',
-                        hintText: 'enter prescription'
-                    ),
+                        hintText: 'enter prescription'),
                   ),
                   SizedBox(height: 15.0),
                   // Ailment
                   TextFormField(
                     controller: _extraremarks,
-                    decoration:
-                    InputDecoration(
+                    decoration: InputDecoration(
                         labelText: 'Extra remarks',
-                        hintText: 'enter extra remarks'
-                    ),
+                        hintText: 'enter extra remarks'),
                   ),
 
                   RaisedButton(
                     child: Text('Submit'),
                     onPressed: () {
-
-                      Map <String,dynamic>data= {
-
+                      Map<String, dynamic> data = {
                         "id": _id.text,
                         "ailment": _ailment.text,
                         "prescription": _prescription.text,
                         "extraremarks": _extraremarks.text
                       };
-                      Firestore.instance.collection("add_record").add(data);
-                      Navigator.of(context).pushReplacementNamed(DoctorHomeScreen.routeName);
+                      print(data);
+                      Firestore.instance
+                          .collection("add_record")
+                          .doc(_id.text)
+                          .set(data);
+                      Navigator.of(context)
+                          .pushReplacementNamed(DoctorHomeScreen.routeName);
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -113,8 +107,6 @@ class _AddRecordState extends State<AddRecord> {
                   //     ),
                   //   ),
                   // ),
-
-
                 ],
               ),
             ))));

@@ -13,6 +13,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.blue,
         ),
-        home: LoginScreen(),
+        home: DoctorHomeScreen(),
         routes: {
           SignupScreen.routeName: (ctx) => SignupScreen(),
           LoginScreen.routeName: (ctx) => LoginScreen(),
