@@ -1,15 +1,26 @@
+import 'package:Medhist/models/personal_details.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/authentication.dart';
-
+import 'patient_home_screen.dart';
 import 'doctor_home_screen.dart';
 import 'login_screen.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(SignupScreen());
+}
 class SignupScreen extends StatefulWidget {
+
   static const routeName = '/signup';
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
+
+
 
 class Category {
   int id;
@@ -20,16 +31,23 @@ class Category {
     return <Category>[
       Category(1, 'Doctor'),
       Category(2, 'Patient'),
-      Category(3, 'Diagnostic Centre'),
     ];
   }
 }
 
 class _SignupScreenState extends State<SignupScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  TextEditingController _name = TextEditingController();
+  TextEditingController _phone_number =new TextEditingController();
+  TextEditingController _hospital =new TextEditingController();
+  TextEditingController _role=new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
 
-  Map<String, String> _authData = {'email': '', 'password': ''};
+  Map<String, String> _authData = {
+    'email': '',
+    'password': '',
+
+  };
 
   List<Category> _categories = Category.getCategories();
   List<DropdownMenuItem<Category>> _dropdownMenuItems;
@@ -82,7 +100,8 @@ class _SignupScreenState extends State<SignupScreen> {
     try {
       await Provider.of<Authentication>(context, listen: false)
           .signUp(_authData['email'], _authData['password']);
-      Navigator.of(context).pushReplacementNamed(DoctorHomeScreen.routeName);
+
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     } catch (error) {
       var errorMessage = 'Authentication Failed. Please try again later.';
       _showErrorDialog(errorMessage);
@@ -131,35 +150,23 @@ class _SignupScreenState extends State<SignupScreen> {
                       children: <Widget>[
                         // NAME
                         TextFormField(
-                          decoration: InputDecoration(labelText: 'Full Name'),
-                          keyboardType: TextInputType.text,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Enter your name';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _authData['email'] = value;
-                          },
+                          controller: _name,
+                          decoration:
+                          InputDecoration(
+                              labelText: 'Full name',
+                            hintText: 'Enter your name'
+                          ),
                         ),
 
                         // PHONE NUMBER
                         TextFormField(
+                          controller: _phone_number,
                           decoration:
-                              InputDecoration(labelText: 'Phone Number'),
-                          keyboardType: TextInputType.text,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Enter phone number';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _authData['email'] = value;
-                          },
+                          InputDecoration(
+                              labelText: 'Phone number',
+                              hintText: 'Enter your Phone number'
+                          ),
                         ),
-
                         //EMAIL
                         TextFormField(
                           decoration: InputDecoration(labelText: 'Email'),
@@ -208,38 +215,22 @@ class _SignupScreenState extends State<SignupScreen> {
 
                         // HOSPITAL NAME
                         TextFormField(
+                          controller: _hospital,
                           decoration:
-                              InputDecoration(labelText: 'Hospital Name'),
-                          keyboardType: TextInputType.text,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Enter the hospital name';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            _authData['email'] = value;
-                          },
+                          InputDecoration(
+                              labelText: 'Hospital name',
+                              hintText: 'Enter Hospital name'
+                          ),
                         ),
 
-                        SizedBox(
-                          height: 20,
+                        TextFormField(
+                          controller: _role,
+                          decoration:
+                          InputDecoration(
+                              labelText: 'Enter your role',
+                              hintText: 'doctor/patient'
+                          ),
                         ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Category :   ",
-                                style: TextStyle(fontSize: 15),
-                              ),
-                              SizedBox(
-                                  height: 20.0,
-                                  child: DropdownButton(
-                                    value: _selectedCategory,
-                                    items: _dropdownMenuItems,
-                                    onChanged: onChangedDropdownItem,
-                                  )),
-                            ]),
 
                         SizedBox(
                           height: 25,
@@ -248,6 +239,14 @@ class _SignupScreenState extends State<SignupScreen> {
                           child: Text('Submit'),
                           onPressed: () {
                             _submit();
+                            Map <String,dynamic>data= {
+                              "email":_authData['email'],
+                              "name": _name.text,
+                              "phone_number": _phone_number.text,
+                              "hospital name": _hospital.text,
+                              "role": _role.text
+                            };
+                            Firestore.instance.collection("test").add(data);
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
