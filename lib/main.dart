@@ -1,3 +1,4 @@
+import 'package:Medhist/screens/add_record_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Medhist/screens/doctor_home_screen.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.blue,
         ),
-        home: DoctorHomeScreen(),
+        home: LoginScreen(),
         routes: {
           SignupScreen.routeName: (ctx) => SignupScreen(),
           LoginScreen.routeName: (ctx) => LoginScreen(),

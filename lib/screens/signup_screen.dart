@@ -8,19 +8,18 @@ import 'doctor_home_screen.dart';
 import 'login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(SignupScreen());
 }
-class SignupScreen extends StatefulWidget {
 
+class SignupScreen extends StatefulWidget {
   static const routeName = '/signup';
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
-
-
 
 class Category {
   int id;
@@ -38,15 +37,14 @@ class Category {
 class _SignupScreenState extends State<SignupScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   TextEditingController _name = TextEditingController();
-  TextEditingController _phone_number =new TextEditingController();
-  TextEditingController _hospital =new TextEditingController();
-  TextEditingController _role=new TextEditingController();
+  TextEditingController _phone_number = new TextEditingController();
+  TextEditingController _hospital = new TextEditingController();
+  TextEditingController _role = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
 
   Map<String, String> _authData = {
     'email': '',
     'password': '',
-
   };
 
   List<Category> _categories = Category.getCategories();
@@ -151,21 +149,17 @@ class _SignupScreenState extends State<SignupScreen> {
                         // NAME
                         TextFormField(
                           controller: _name,
-                          decoration:
-                          InputDecoration(
+                          decoration: InputDecoration(
                               labelText: 'Full name',
-                            hintText: 'Enter your name'
-                          ),
+                              hintText: 'Enter your name'),
                         ),
 
                         // PHONE NUMBER
                         TextFormField(
                           controller: _phone_number,
-                          decoration:
-                          InputDecoration(
+                          decoration: InputDecoration(
                               labelText: 'Phone number',
-                              hintText: 'Enter your Phone number'
-                          ),
+                              hintText: 'Enter your Phone number'),
                         ),
                         //EMAIL
                         TextFormField(
@@ -216,20 +210,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         // HOSPITAL NAME
                         TextFormField(
                           controller: _hospital,
-                          decoration:
-                          InputDecoration(
+                          decoration: InputDecoration(
                               labelText: 'Hospital name',
-                              hintText: 'Enter Hospital name'
-                          ),
+                              hintText: 'Enter Hospital name'),
                         ),
 
                         TextFormField(
                           controller: _role,
-                          decoration:
-                          InputDecoration(
+                          decoration: InputDecoration(
                               labelText: 'Enter your role',
-                              hintText: 'doctor/patient'
-                          ),
+                              hintText: 'doctor/patient'),
                         ),
 
                         SizedBox(
@@ -238,15 +228,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         RaisedButton(
                           child: Text('Submit'),
                           onPressed: () {
-
-                            Map <String,dynamic>data= {
-                              "email":_authData['email'],
+                            Map<String, dynamic> data = {
+                              "email": _authData['email'],
                               "name": _name.text,
                               "phone_number": _phone_number.text,
                               "hospital name": _hospital.text,
                               "role": _role.text
                             };
-                            Firestore.instance.collection("user_info").add(data);
+                            FirebaseFirestore.instance
+                                .collection("user_info")
+                                .add(data);
                             _submit();
                           },
                           shape: RoundedRectangleBorder(
