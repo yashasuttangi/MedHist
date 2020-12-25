@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "294757639701",
+    "firebase_url": "https://loginproj-1a1c3-default-rtdb.firebaseio.com",
+    "project_id": "loginproj-1a1c3",
+    "storage_bucket": "loginproj-1a1c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294757639701:android:b6dea778266e3c05fc901c",
+        "android_client_info": {
+          "package_name": "com.example.Medhist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294757639701-485q0vus27ttkf75g46kdr2d1749ho8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzZaKPX_Gjphw94hES_RXc4Z1TPzIio0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294757639701-485q0vus27ttkf75g46kdr2d1749ho8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

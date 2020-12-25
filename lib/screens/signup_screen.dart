@@ -238,7 +238,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         RaisedButton(
                           child: Text('Submit'),
                           onPressed: () {
-                            _submit();
+
                             Map <String,dynamic>data= {
                               "email":_authData['email'],
                               "name": _name.text,
@@ -246,7 +246,8 @@ class _SignupScreenState extends State<SignupScreen> {
                               "hospital name": _hospital.text,
                               "role": _role.text
                             };
-                            Firestore.instance.collection("test").add(data);
+                            Firestore.instance.collection("user_info").add(data);
+                            _submit();
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),

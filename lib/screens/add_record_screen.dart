@@ -1,22 +1,25 @@
 import 'package:Medhist/models/authentication.dart';
+import 'package:Medhist/screens/doctor_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(AddRecord());
+}
 class AddRecord extends StatefulWidget {
   @override
   _AddRecordState createState() => _AddRecordState();
 }
 
 class _AddRecordState extends State<AddRecord> {
-  Map<String, String> _patientData = {
-    'id': '',
-    'ailment': '',
-    'prescription': '',
-    'checked': '',
-    'extraremarks': ''
-  };
+  TextEditingController _id=new TextEditingController();
+  TextEditingController _ailment=new TextEditingController();
+  TextEditingController _prescription=new TextEditingController();
+  TextEditingController _extraremarks=new TextEditingController();
 
-  bool _checked;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class _AddRecordState extends State<AddRecord> {
           backgroundColor: Colors.blue,
         ),
         body: Container(
-            height: 300,
+            height: 600,
             width: 400,
             padding: EdgeInsets.all(16),
             child: Form(
@@ -34,69 +37,65 @@ class _AddRecordState extends State<AddRecord> {
                 child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  //Patient ID
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Patient ID'),
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Enter patient ID';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _patientData['id'] = value;
-                    },
+                    controller: _id,
+                    decoration:
+                    InputDecoration(
+                        labelText: 'User id',
+                        hintText: 'Enter patients id'
+                    ),
                   ),
                   SizedBox(height: 15.0),
-                  // Ailment
+                  //Patient ID
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Ailment / Illness'),
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Enter ailment';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _patientData['ailment'] = value;
-                    },
+                    controller: _ailment,
+                    decoration:
+                    InputDecoration(
+                        labelText: 'Ailment',
+                        hintText: 'Enter ailment'
+                    ),
                   ),
                   SizedBox(height: 15.0),
                   // Prescription
                   TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Prescription',
+                    controller: _prescription,
+                    decoration:
+                    InputDecoration(
+                        labelText: 'prescription',
+                        hintText: 'enter prescription'
                     ),
-                    // contentPadding: EdgeInsets.all(20.0)),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Enter Prescription';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _patientData['prescription'] = value;
-                    },
                   ),
                   SizedBox(height: 15.0),
                   // Ailment
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Extra remarks'),
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Extra remarks';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _patientData['extraremarks'] = value;
-                    },
+                    controller: _extraremarks,
+                    decoration:
+                    InputDecoration(
+                        labelText: 'Extra remarks',
+                        hintText: 'enter extra remarks'
+                    ),
                   ),
+
+                  RaisedButton(
+                    child: Text('Submit'),
+                    onPressed: () {
+
+                      Map <String,dynamic>data= {
+
+                        "id": _id.text,
+                        "ailment": _ailment.text,
+                        "prescription": _prescription.text,
+                        "extraremarks": _extraremarks.text
+                      };
+                      Firestore.instance.collection("add_record").add(data);
+                      Navigator.of(context).pushReplacementNamed(DoctorHomeScreen.routeName);
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                  )
 
                   // SizedBox(
                   //   height: 100,
@@ -115,17 +114,7 @@ class _AddRecordState extends State<AddRecord> {
                   //   ),
                   // ),
 
-                  Row(children: <Widget>[
-                    //   Checkbox(
-                    //       // value: _checked,
-                    //       onChanged: (bool value) {
-                    //     // print(value);
-                    //     setState(() {
-                    //       _checked = value;
-                    //     });
-                    //   }),
-                    //   Text("Blood Test")
-                  ]),
+
                 ],
               ),
             ))));
