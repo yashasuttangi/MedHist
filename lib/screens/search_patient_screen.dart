@@ -14,37 +14,13 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController _phone_number = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    // StreamBuilder(
-    //   stream:
-    //       FirebaseFirestore.instance.collection("_phone_number").snapshots(),
-    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-    //     if (snapshot.hasData) {
-    //       return new ListView.builder(
-    //           shrinkWrap: true,
-    //           itemCount: snapshot.data.documents.length,
-    //           padding: const EdgeInsets.only(top: 5.0),
-    //           itemBuilder: (context, index) {
-    //             DocumentSnapshot ds = snapshot.data.documents[index];
-    //             return new Row(
-    //               textDirection: TextDirection.ltr,
-    //               children: <Widget>[
-    //                 Expanded(child: Text(ds["date"])),
-    //                 Expanded(child: Text(ds["ailment"])),
-    //                 Expanded(child: Text(ds["prescription"])),
-    //                 Expanded(child: Text(ds["extraremarks"].toString())),
-    //               ],
-    //             );
-    //           });
-    //     }
-    //   },
-    // );
-    Future getDocs() async {
+    Future getDocs(phone_number) async {
       QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection(_phone_number.text).get();
+          await FirebaseFirestore.instance.collection(phone_number).get();
       for (int i = 0; i < querySnapshot.docs.length; i++) {
         var a = querySnapshot.docs[i];
         DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-            .collection(_phone_number.text)
+            .collection(phone_number)
             .doc(a.id)
             .get();
         print(documentSnapshot.data().values);
@@ -76,7 +52,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     IconButton(
                       icon: Icon(Icons.search),
                       onPressed: () {
-                        getDocs();
+                        var phone_number = _phone_number;
+                        getDocs(phone_number.text);
                       },
                     )
                     // Container(
