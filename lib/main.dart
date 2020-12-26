@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Login App',
+        title: 'MedHist app',
         theme: ThemeData(
           primaryColor: Colors.blue,
         ),
