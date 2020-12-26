@@ -229,7 +229,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           child: Text('Submit'),
                           onPressed: () {
                             Map<String, dynamic> data = {
-                              "email": _authData['email'],
                               "name": _name.text,
                               "phone_number": _phone_number.text,
                               "hospital name": _hospital.text,
@@ -237,7 +236,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             };
                             FirebaseFirestore.instance
                                 .collection("user_info")
-                                .add(data);
+                                .doc(_phone_number.text)
+                                .set(data);
                             _submit();
                           },
                           shape: RoundedRectangleBorder(

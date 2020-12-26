@@ -1,3 +1,4 @@
+import 'package:Medhist/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:Medhist/models/http_exception.dart';
 
@@ -7,9 +8,20 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: new AppBar(
-          title: Text("Dashboard"),
-          backgroundColor: Colors.blue,
+        appBar: AppBar(
+          title: Text('Dashboard'),
+          actions: <Widget>[
+            FlatButton(
+              child: Row(
+                children: <Widget>[Text('Logout'), Icon(Icons.person_add)],
+              ),
+              textColor: Colors.white,
+              onPressed: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(LoginScreen.routeName);
+              },
+            )
+          ],
         ),
         backgroundColor: Colors.blue[100],
         body: Container(
