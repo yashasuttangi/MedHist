@@ -9,7 +9,7 @@ import 'http_exception.dart';
 class Authentication with ChangeNotifier {
   Future<void> signUp(String email, String password) async {
     const url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD8gLQtdNHprd8iRAHIw_i59VPQt2g796w';
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAgevev9psIoOTuItyZHPkwhLUF7HwLFDs';
 
     try {
       final response = await http.post(url,
