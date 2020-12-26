@@ -17,7 +17,8 @@ class AddRecord extends StatefulWidget {
 }
 
 class _AddRecordState extends State<AddRecord> {
-  TextEditingController _id = new TextEditingController();
+  TextEditingController _phone_number = new TextEditingController();
+  TextEditingController _date = new TextEditingController();
   TextEditingController _ailment = new TextEditingController();
   TextEditingController _prescription = new TextEditingController();
   TextEditingController _extraremarks = new TextEditingController();
@@ -39,9 +40,10 @@ class _AddRecordState extends State<AddRecord> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    controller: _id,
+                    controller: _phone_number,
                     decoration: InputDecoration(
-                        labelText: 'User id', hintText: 'Enter patients id'),
+                        labelText: 'Phone number',
+                        hintText: 'Enter phone number'),
                   ),
                   SizedBox(height: 15.0),
                   //Patient ID
@@ -66,20 +68,27 @@ class _AddRecordState extends State<AddRecord> {
                         labelText: 'Extra remarks',
                         hintText: 'enter extra remarks'),
                   ),
-
+                  SizedBox(height: 15.0),
+                  //date
+                  TextFormField(
+                    controller: _date,
+                    decoration: InputDecoration(
+                        labelText: 'Date', hintText: 'dd-mm-yyyy'),
+                  ),
                   RaisedButton(
                     child: Text('Submit'),
                     onPressed: () {
                       Map<String, dynamic> data = {
-                        "id": _id.text,
+                        "date": _date.text,
+                        "phone number": _phone_number.text,
                         "ailment": _ailment.text,
                         "prescription": _prescription.text,
                         "extraremarks": _extraremarks.text
                       };
                       print(data);
-                      Firestore.instance
-                          .collection("add_record")
-                          .doc(_id.text)
+                      FirebaseFirestore.instance
+                          .collection(_phone_number.text)
+                          .doc(_date.text)
                           .set(data);
                       Navigator.of(context)
                           .pushReplacementNamed(DoctorHomeScreen.routeName);
