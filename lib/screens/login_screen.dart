@@ -14,8 +14,15 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-
+  TextEditingController _email = new TextEditingController();
   Map<String, String> _authData = {'email': '', 'password': ''};
+  Future getDocs(email) async {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection("user_info")
+        .doc(email)
+        .get();
+    print(documentSnapshot['role']);
+  }
 
   void _showErrorDialog(String msg) {
     showDialog(
@@ -130,6 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       //email
                       TextFormField(
+                        controller: _email,
                         decoration: InputDecoration(labelText: 'Email'),
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
@@ -175,6 +183,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 horizontal: 40, vertical: 15),
                             child: Text('LogIn'),
                             onPressed: () {
+                              getDocs(_email.text);
+
                               _submit();
                             },
                             shape: RoundedRectangleBorder(

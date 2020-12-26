@@ -238,7 +238,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             };
                             FirebaseFirestore.instance
                                 .collection("user_info")
-                                .doc(_phone_number.text)
+                                .doc(_email.text)
                                 .set(data);
                             _submit();
                           },
