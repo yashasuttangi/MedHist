@@ -1,4 +1,4 @@
-import 'package:Medhist/models/personal_details.dart';
+// import 'package:Medhist/models/personal_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +41,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController _hospital = new TextEditingController();
   TextEditingController _role = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
+  TextEditingController _email = new TextEditingController();
 
   Map<String, String> _authData = {
     'email': '',
@@ -163,6 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         //EMAIL
                         TextFormField(
+                          controller: _email,
                           decoration: InputDecoration(labelText: 'Email'),
                           keyboardType: TextInputType.emailAddress,
                           validator: (value) {
@@ -229,6 +231,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           child: Text('Submit'),
                           onPressed: () {
                             Map<String, dynamic> data = {
+                              "email": _email.text,
                               "name": _name.text,
                               "phone_number": _phone_number.text,
                               "hospital name": _hospital.text,
