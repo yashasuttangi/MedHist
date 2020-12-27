@@ -12,18 +12,42 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController _phone_number = new TextEditingController();
+  TextEditingController _date = new TextEditingController();
+  Map<String, String> _authData = {
+    'date': '',
+    'ailment': '',
+    'prescription': '',
+    'extraremarks': ''
+  };
   @override
   Widget build(BuildContext context) {
-    Future<String> getDocs(phone_number) async {
-      QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection(phone_number).get();
-      for (int i = 0; i < querySnapshot.docs.length; i++) {
-        var a = querySnapshot.docs[i];
+    void _showErrorDialog(String msg) {
+      showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+                title: Text('An Error Occured'),
+                content: Text(msg),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text('Okay'),
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                    },
+                  )
+                ],
+              ));
+    }
+
+    Future getDocs(String phone_number, String date) async {
+      try {
         DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
             .collection(phone_number)
-            .doc(a.id)
+            .doc(date)
             .get();
-        print(documentSnapshot.data().values);
+        return documentSnapshot.data().values;
+      } catch (e) {
+        var errorMessage = 'Invalid search input try again...';
+        _showErrorDialog(errorMessage);
       }
     }
 
@@ -33,39 +57,60 @@ class _SearchScreenState extends State<SearchScreen> {
           backgroundColor: Colors.blue,
         ),
         body: Container(
-            child: Column(
-          children: <Widget>[
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        controller: _phone_number,
-                        decoration: InputDecoration(
-                            hintText: "Enter patient's phone number",
-                            hintStyle:
-                                TextStyle(fontSize: 18, color: Colors.black26),
-                            border: InputBorder.none),
-                      ),
+            height: 600,
+            width: 400,
+            padding: EdgeInsets.all(16),
+            child: Form(
+                // key: _formKey,
+                child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    controller: _phone_number,
+                    decoration: InputDecoration(
+                        labelText: 'Phone number',
+                        hintText: 'Enter phone number'),
+                  ),
+                  SizedBox(height: 15.0),
+
+                  //date
+                  TextFormField(
+                    controller: _date,
+                    decoration: InputDecoration(
+                        labelText: 'Date', hintText: 'dd-mm-yyyy'),
+                  ),
+                  RaisedButton(
+                    child: Text('Submit'),
+                    onPressed: () {
+                      getDocs(_phone_number.text, _date.text).then((data) {
+                        print(data);
+                      });
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.search),
-                      onPressed: () {
-                        var phone_number = _phone_number;
-                        getDocs(phone_number.text);
-                      },
-                    )
-                    // Container(
-                    //     padding: EdgeInsets.all(10),
-                    //     child: RaisedButton(
-                    //       padding: EdgeInsets.all(10),
-                    //       child: (Image.asset("images/search_vector.png")),
-                    //       onPressed: () {},
-                    //     ))
-                  ],
-                ))
-          ],
-        )));
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                  )
+
+                  // SizedBox(
+                  //   height: 100,
+                  //   width: 450,
+                  //   child: Padding(
+                  //     padding:
+                  //         EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+                  //     child: Text(
+                  //       "Prescribed Tests",
+                  //       style: TextStyle(
+                  //           fontSize: 15.0,
+                  //           fontWeight: FontWeight.bold,
+                  //           color: Colors.black),
+                  //       textAlign: TextAlign.start,
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
+            ))));
   }
 }
