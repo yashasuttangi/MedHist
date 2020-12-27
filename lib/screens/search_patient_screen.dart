@@ -14,7 +14,7 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController _phone_number = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Future getDocs(phone_number) async {
+    Future<String> getDocs(phone_number) async {
       QuerySnapshot querySnapshot =
           await FirebaseFirestore.instance.collection(phone_number).get();
       for (int i = 0; i < querySnapshot.docs.length; i++) {

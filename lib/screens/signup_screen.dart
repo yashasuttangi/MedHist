@@ -229,7 +229,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         RaisedButton(
                           child: Text('Submit'),
                           onPressed: () {
-                            Map<String, dynamic> data = {
+                            Map<String, String> data = {
                               "email": _email.text,
                               "name": _name.text,
                               "phone_number": _phone_number.text,

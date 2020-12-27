@@ -78,7 +78,7 @@ class _AddRecordState extends State<AddRecord> {
                   RaisedButton(
                     child: Text('Submit'),
                     onPressed: () {
-                      Map<String, dynamic> data = {
+                      Map<String, String> data = {
                         "date": _date.text,
                         "phone number": _phone_number.text,
                         "ailment": _ailment.text,

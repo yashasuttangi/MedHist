@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'signup_screen.dart';
 import 'doctor_home_screen.dart';
+import 'patient_home_screen.dart';
+import 'package:Medhist/main.dart';
 import '../models/authentication.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,13 +17,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   TextEditingController _email = new TextEditingController();
-  Map<String, String> _authData = {'email': '', 'password': ''};
-  Future getDocs(email) async {
+  Map<String, String> _authData = {'email': '', 'password': '', 'role': ''};
+  Future<String> getDocs(String email) async {
     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
         .collection("user_info")
         .doc(email)
         .get();
-    print(documentSnapshot['role']);
+    return documentSnapshot['role'];
   }
 
   void _showErrorDialog(String msg) {
@@ -50,7 +52,14 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       await Provider.of<Authentication>(context, listen: false)
           .logIn(_authData['email'], _authData['password']);
-      Navigator.of(context).pushReplacementNamed(DoctorHomeScreen.routeName);
+      if (_authData['role'] == 'doctor') {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => DoctorHomeScreen()));
+      }
+      if (_authData['role'] == 'patient') {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => PatientHomeScreen()));
+      }
     } catch (error) {
       var errorMessage = 'Authentication Failed. Please try again later.';
       _showErrorDialog(errorMessage);
@@ -148,6 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         onSaved: (value) {
                           _authData['email'] = value;
+                          getDocs(value).then((role) {
+                            _authData['role'] = role;
+                          });
                         },
                       ),
 
