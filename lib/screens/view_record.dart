@@ -15,24 +15,36 @@ class ViewRecord extends StatefulWidget {
 class _ViewRecordState extends State<ViewRecord> {
   set list(Iterable list) {}
 
-  @override
-  Widget build(BuildContext context) {
-    Future<String> getDocs(String email, String date) async {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+  List<dynamic> myList = List<dynamic>();
+
+  Future<dynamic> getDocs(String email) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection("user_info")
+        .doc(email)
+        .collection("medical_records")
+        .get();
+    for (int i = 0; i < querySnapshot.docs.length; i++) {
+      var a = querySnapshot.docs[i];
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
           .collection("user_info")
           .doc(email)
           .collection("medical_records")
+          .doc(a.id)
           .get();
-      for (int i = 0; i < querySnapshot.docs.length; i++) {
-        var a = querySnapshot.docs[i];
-        DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-            .collection("user_info")
-            .doc(email)
-            .collection("medical_records")
-            .doc(a.id)
-            .get();
-        print(documentSnapshot.data().values);
-      }
+
+      myList.add(documentSnapshot.data().values);
     }
+    return myList;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: ListView.builder(
+      itemCount: myList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile();
+      },
+    ));
   }
 }
