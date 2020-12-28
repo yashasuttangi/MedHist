@@ -17,7 +17,7 @@ class _ViewRecordState extends State<ViewRecord> {
   set list(Iterable list) {}
 
   String _email1 = "yashuttangi@gmail.com";
-  String _email2 = "patient2@gmail.com";
+  String _email2 = "trumpgandhi7@gmail.com";
 
   List<dynamic> myList = List<dynamic>();
 
@@ -48,7 +48,7 @@ class _ViewRecordState extends State<ViewRecord> {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("user_info")
-            .doc(_email1)
+            .doc(_email2)
             .collection("medical_records")
             .snapshots(),
         builder: (context, snapshot) {
@@ -58,24 +58,95 @@ class _ViewRecordState extends State<ViewRecord> {
           return Scaffold(
               appBar: AppBar(title: Text("View History")),
               body: Container(
+                alignment: Alignment.center,
                 child: Column(children: <Widget>[
+                  SizedBox(height: 10),
                   Container(
-                      width: 250,
+                      width: 300,
+                      // alignment: Alignment.center,
+                      // padding: EdgeInsets.symmetric(),
                       child: Card(
-                          child: Column(
-                        children: [
+                          child: Column(children: [
+                        Row(children: [
+                          Text("Ailment :"),
+                          SizedBox(width: 10),
                           Text(snapshot.data.documents[0]['ailment'],
                               style: TextStyle(fontSize: 20)),
-                          Text(snapshot.data.documents[0]['prescription'],
-                              style: TextStyle(fontSize: 15)),
-                        ],
-                      ))),
-                  Card(
-                      child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Text(snapshot.data.documents[0]['prescription'],
-                        style: TextStyle(fontSize: 15)),
-                  ))
+                        ]),
+                        Row(
+                          children: [
+                            Text("Prescription :"),
+                            SizedBox(width: 10),
+                            Text(snapshot.data.documents[0]['prescription'],
+                                style: TextStyle(fontSize: 20)),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text("Remarks :"),
+                            SizedBox(width: 10),
+                            Text(snapshot.data.documents[0]['extraremarks'],
+                                style: TextStyle(fontSize: 20)),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text("Date :"),
+                            SizedBox(width: 10),
+                            Text(snapshot.data.documents[0]['date'],
+                                style: TextStyle(fontSize: 20)),
+                          ],
+                        ),
+                      ]))),
+
+                  SizedBox(height: 15),
+
+                  Container(
+                      width: 300,
+                      child: Card(
+                          child: Column(children: [
+                        Row(children: [
+                          Text("Ailment :"),
+                          SizedBox(width: 10),
+                          Text(snapshot.data.documents[1]['ailment'],
+                              style: TextStyle(fontSize: 20)),
+                        ]),
+                        Row(
+                          children: [
+                            Text("Prescription :"),
+                            SizedBox(width: 10),
+                            Text(snapshot.data.documents[1]['prescription'],
+                                style: TextStyle(fontSize: 20)),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text("Remarks :"),
+                            SizedBox(width: 10),
+                            Text(snapshot.data.documents[1]['extraremarks'],
+                                style: TextStyle(fontSize: 20)),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text("Date :"),
+                            SizedBox(width: 10),
+                            Text(snapshot.data.documents[1]['date'],
+                                style: TextStyle(fontSize: 20)),
+                          ],
+                        ),
+                      ]))),
+                  // Container(
+                  //     width: 250,
+                  //     child: Card(
+                  //         child: Column(
+                  //       children: [
+                  //         Text(snapshot.data.documents[1]['ailment'],
+                  //             style: TextStyle(fontSize: 20)),
+                  //         Text(snapshot.data.documents[1]['prescription'],
+                  //             style: TextStyle(fontSize: 15)),
+                  //       ],
+                  //     ))),
                 ]),
               ));
         });

@@ -1,5 +1,6 @@
 import 'package:Medhist/models/authentication.dart';
 import 'package:Medhist/screens/doctor_home_screen.dart';
+import 'package:Medhist/screens/view_record.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -86,6 +87,10 @@ class _SearchScreenState extends State<SearchScreen> {
                       getDocs(_email.text, _date.text).then((data) {
                         print(data);
                       });
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewRecord()));
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
