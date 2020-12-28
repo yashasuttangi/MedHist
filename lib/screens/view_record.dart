@@ -17,7 +17,7 @@ class _ViewRecordState extends State<ViewRecord> {
   set list(Iterable list) {}
 
   String _email1 = "patient@gmail.com";
-  String _email2 = "patient2@gmail.com";
+  String _email2 = "patient1@gmail.com";
 
   List<dynamic> myList = List<dynamic>();
 
@@ -48,7 +48,7 @@ class _ViewRecordState extends State<ViewRecord> {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("user_info")
-            .doc(_email2)
+            .doc(_email1)
             .collection("medical_records")
             .snapshots(),
         builder: (context, snapshot) {
