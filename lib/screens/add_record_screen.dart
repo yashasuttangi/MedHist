@@ -17,7 +17,7 @@ class AddRecord extends StatefulWidget {
 }
 
 class _AddRecordState extends State<AddRecord> {
-  TextEditingController _phone_number = new TextEditingController();
+  TextEditingController _email = new TextEditingController();
   TextEditingController _date = new TextEditingController();
   TextEditingController _ailment = new TextEditingController();
   TextEditingController _prescription = new TextEditingController();
@@ -40,10 +40,9 @@ class _AddRecordState extends State<AddRecord> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    controller: _phone_number,
+                    controller: _email,
                     decoration: InputDecoration(
-                        labelText: 'Phone number',
-                        hintText: 'Enter phone number'),
+                        labelText: 'Email', hintText: 'Enter Email'),
                   ),
                   SizedBox(height: 15.0),
                   //Patient ID
@@ -80,14 +79,16 @@ class _AddRecordState extends State<AddRecord> {
                     onPressed: () {
                       Map<String, String> data = {
                         "date": _date.text,
-                        "phone number": _phone_number.text,
+                        "email": _email.text,
                         "ailment": _ailment.text,
                         "prescription": _prescription.text,
                         "extraremarks": _extraremarks.text
                       };
                       print(data);
                       FirebaseFirestore.instance
-                          .collection(_phone_number.text)
+                          .collection("user_info")
+                          .doc(_email.text)
+                          .collection("medical_records")
                           .doc(_date.text)
                           .set(data);
                       Navigator.of(context)

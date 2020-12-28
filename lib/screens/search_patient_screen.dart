@@ -11,7 +11,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  TextEditingController _phone_number = new TextEditingController();
+  TextEditingController _email = new TextEditingController();
   TextEditingController _date = new TextEditingController();
   Map<String, String> _authData = {
     'date': '',
@@ -38,10 +38,12 @@ class _SearchScreenState extends State<SearchScreen> {
               ));
     }
 
-    Future getDocs(String phone_number, String date) async {
+    Future getDocs(String email, String date) async {
       try {
         DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-            .collection(phone_number)
+            .collection("user_info")
+            .doc(email)
+            .collection("medical_records")
             .doc(date)
             .get();
         return documentSnapshot.data().values;
@@ -66,10 +68,9 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    controller: _phone_number,
+                    controller: _email,
                     decoration: InputDecoration(
-                        labelText: 'Phone number',
-                        hintText: 'Enter phone number'),
+                        labelText: 'Email', hintText: 'Enter Email'),
                   ),
                   SizedBox(height: 15.0),
 
@@ -82,7 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   RaisedButton(
                     child: Text('Submit'),
                     onPressed: () {
-                      getDocs(_phone_number.text, _date.text).then((data) {
+                      getDocs(_email.text, _date.text).then((data) {
                         print(data);
                       });
                     },
