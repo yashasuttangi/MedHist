@@ -17,16 +17,21 @@ class _ViewRecordState extends State<ViewRecord> {
 
   @override
   Widget build(BuildContext context) {
-    Future getDocs(phone_number) async {
-      QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection(phone_number).get();
+    Future<String> getDocs(String email, String date) async {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection("user_info")
+          .doc(email)
+          .collection("medical_records")
+          .get();
       for (int i = 0; i < querySnapshot.docs.length; i++) {
         var a = querySnapshot.docs[i];
         DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-            .collection(phone_number)
+            .collection("user_info")
+            .doc(email)
+            .collection("medical_records")
             .doc(a.id)
             .get();
-        return documentSnapshot.data().values;
+        print(documentSnapshot.data().values);
       }
     }
   }
