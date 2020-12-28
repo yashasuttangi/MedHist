@@ -1,4 +1,5 @@
 import 'package:Medhist/screens/add_record_screen.dart';
+import 'package:Medhist/screens/view_record.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Medhist/screens/doctor_home_screen.dart';

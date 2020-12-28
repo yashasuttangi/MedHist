@@ -5,6 +5,7 @@ import 'add_record_screen.dart';
 import 'search_patient_screen.dart';
 import 'chatbox_screen.dart';
 import 'recent_patient_screen.dart';
+import 'package:Medhist/screens/view_record.dart';
 
 class PatientHomeScreen extends StatelessWidget {
   static const routeName = '/home';
@@ -90,7 +91,7 @@ class PatientHomeScreen extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SearchScreen()));
+                                                ViewRecord()));
                                   },
                                 ))),
                         Padding(

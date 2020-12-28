@@ -26,6 +26,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return documentSnapshot['role'];
   }
 
+  String getEmail() {
+    return _authData['email'];
+  }
+
   void _showErrorDialog(String msg) {
     showDialog(
         context: context,
