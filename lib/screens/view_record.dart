@@ -16,8 +16,8 @@ class ViewRecord extends StatefulWidget {
 class _ViewRecordState extends State<ViewRecord> {
   set list(Iterable list) {}
 
-  String _email1 = "yashuttangi@gmail.com";
-  String _email2 = "trumpgandhi7@gmail.com";
+  String _email1 = "patient@gmail.com";
+  String _email2 = "patient2@gmail.com";
 
   List<dynamic> myList = List<dynamic>();
 

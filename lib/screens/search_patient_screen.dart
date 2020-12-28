@@ -76,17 +76,17 @@ class _SearchScreenState extends State<SearchScreen> {
                   SizedBox(height: 15.0),
 
                   //date
-                  TextFormField(
-                    controller: _date,
-                    decoration: InputDecoration(
-                        labelText: 'Date', hintText: 'dd-mm-yyyy'),
-                  ),
+                  // TextFormField(
+                  //   controller: _date,
+                  //   decoration: InputDecoration(
+                  //       labelText: 'Date', hintText: 'dd-mm-yyyy'),
+                  // ),
                   RaisedButton(
                     child: Text('Submit'),
                     onPressed: () {
-                      getDocs(_email.text, _date.text).then((data) {
-                        print(data);
-                      });
+                      // getDocs(_email.text, _date.text).then((data) {
+                      //   print(data);
+                      // });
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
